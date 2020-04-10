@@ -1,15 +1,32 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, FlatList,  } from 'react-native'
+import Header from './components/Header'
+import ListItem from './components/ListItem'
 
 
 const App = () => {
+  const [ items, setItems ] = useState([
+    {id: Math.floor(Math.random() * 100000), text: 'Milk'},
+    {id: Math.floor(Math.random() * 100000), text: 'Rice'},
+    {id: Math.floor(Math.random() * 100000), text: 'Chicken'},
+    {id: Math.floor(Math.random() * 100000), text: 'Apples'},
+  ])
+
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{color: 'darkslateblue', fontSize: 30}}>
-        Hello world!
-      </Text>
+    <View style={styles.container}>
+      <Header />
+      <FlatList data={items} renderItem={({item}) => (
+        <ListItem item={item}/>
+      )} />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 60
+  }
+})
 
 export default App
