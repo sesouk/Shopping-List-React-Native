@@ -14,18 +14,26 @@ const App = () => {
     {id: Math.floor(Math.random() * 100000), text: 'Apples'},
   ])
 
+  const [ editId, setId ] = useState('')
+
+  console.log(editId);
+  
+
+  const [ edit, setEdit ] = useState(false)
+
   const deleteItem = (id) => {
     setItems(prevItems => {
       return prevItems.filter(item => item.id != id)
     })
   }
 
-  const updateItem = (id, text) => {
-    const newItems = [...items]
-    const index = items.findIndex(item => item.id === id)
-    
-    newItems[index].text = text
-    setItems(newItems)
+  const updateItem = (editId, text) => {
+    setItems([{items: items.map(item => {
+      if (item.id === editId) {
+        item.text = text
+      }
+      return item
+    })}])
   }
 
   const addItem = (text) => {
@@ -43,10 +51,14 @@ const App = () => {
   return (
     <View style={styles.container}>
       <Header />
+      { !edit
+      ?
       <AddItem addItem={addItem}/>
-      <UpdateItem updateItem={updateItem}/>
+      :
+      <UpdateItem updateItem={updateItem} />
+      }
       <FlatList data={items} renderItem={({item}) => (
-        <ListItem item={item} deleteItem={deleteItem} updateItem={updateItem}/>
+        <ListItem item={item} deleteItem={deleteItem} setEdit={setEdit} edit={edit} setId={setId} />
       )} />
     </View>
   )

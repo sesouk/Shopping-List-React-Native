@@ -3,10 +3,11 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
 
-const UpdateItem= ({ updateItem}) => {
+const UpdateItem= ({ updateItem }) => {
   const [ text, setText ] = useState('')
 
   const onChange = textValue => setText(textValue)
+  
 
   return (
     <View>
