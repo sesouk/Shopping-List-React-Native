@@ -11,7 +11,7 @@ const UpdateItem= ({ updateItem}) => {
   return (
     <View>
       <TextInput placeholder='Make Changes..' style={styles.input} onChangeText={onChange}/>
-      <TouchableOpacity style={styles.btn} onPress={() => addItem(text)}>
+      <TouchableOpacity style={styles.btn} onPress={() => updateItem(text)}>
         <Text style={styles.btnText}><Icon name='plus' size={20}/> Update Item</Text>
       </TouchableOpacity>
     </View>

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, Alert } from 'react-native'
 import Header from './components/Header'
 import ListItem from './components/ListItem'
 import AddItem from './components/AddItem'
+import UpdateItem from './components/UpdateItem'
 
 
 const App = () => {
@@ -17,9 +18,19 @@ const App = () => {
     setItems(prevItems => {
       return prevItems.filter(item => item.id != id)
     })
-
   }
+
+  const updateItem = (id, text) => {
+    const newItems = [...items]
+    const index = items.findIndex(item => item.id === id)
+    
+    newItems[index].text = text
+    setItems(newItems)
+  }
+
   const addItem = (text) => {
+    console.log(text);
+    
     if (!text) {
       Alert.alert('Error', 'Please enter an item', {text: 'Ok'})
     } else {
@@ -33,8 +44,9 @@ const App = () => {
     <View style={styles.container}>
       <Header />
       <AddItem addItem={addItem}/>
+      <UpdateItem updateItem={updateItem}/>
       <FlatList data={items} renderItem={({item}) => (
-        <ListItem item={item} deleteItem={deleteItem}/>
+        <ListItem item={item} deleteItem={deleteItem} updateItem={updateItem}/>
       )} />
     </View>
   )

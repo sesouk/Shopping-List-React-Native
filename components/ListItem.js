@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
 
-const ListItem = ({item, deleteItem}) => {
+const ListItem = ({item, deleteItem, updateItem}) => {
   const [show, setShow] = useState(false)
   return (
     <TouchableOpacity style={styles.listItem}>
@@ -12,7 +12,7 @@ const ListItem = ({item, deleteItem}) => {
         <Icon name='ellipsis-v' size={20} color='firebrick' onPress={() => setShow(!show)}/>
         { show ?
         <>
-        <Icon name='edit' size={20} color='firebrick' onPress={() => deleteItem(item.id)}/>
+        <Icon name='edit' size={20} color='firebrick' onPress={() => updateItem(item.id)}/>
         <Icon name='remove' size={20} color='firebrick' onPress={() => deleteItem(item.id)}/>
         </>
         : null }
